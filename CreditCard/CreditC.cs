@@ -10,7 +10,8 @@ namespace CreditCard
     internal class CreditCard
     {
         string user_fullname;
-        string valid_time;
+        ushort valid_time_month;
+        ushort valid_time_year;
         string card_number;
         string CVC;
         public CreditCard()
@@ -18,9 +19,10 @@ namespace CreditCard
             card_number = "1111111111111111";
             CVC = "111";
             user_fullname = "NoName";
-            valid_time = "11/99";
+            valid_time_month = 12;
+            valid_time_year = 99;
         }
-        public CreditCard(string user_fullname, string valid_time, string card_number, string CVC)
+        public CreditCard(string user_fullname, string card_number, string CVC, ushort valid_time_month, ushort valid_time_year)
         {
             this.user_fullname = user_fullname;
 
@@ -38,17 +40,19 @@ namespace CreditCard
             else
                 this.CVC = CVC;
 
-            Char[] arr = valid_time.ToCharArray();
-            string checkString = valid_time.Remove(2);
-
-            if (valid_time.Length != 5)
-                throw new Exception("Wrong valid time length.");
-            else if (arr[2] != '/')
-                throw new Exception("Wrong valid time format.");
-            else if (checkString.All(char.IsDigit) != true)
-                throw new Exception("Valid time contains non-digit characters.");
+            if (valid_time_month > 12 || valid_time_month < 0)
+                throw new Exception("Invalid valid time month value");
             else
-                this.valid_time = valid_time;
+                this.valid_time_month = valid_time_month;
+
+            if (valid_time_year > 99 || valid_time_year < 0)
+                throw new Exception("Invalid valid time year value");
+            else
+                this.valid_time_year = valid_time_year;
+
+
+
+  
 
         }
 
@@ -57,7 +61,7 @@ namespace CreditCard
             Console.WriteLine("Full name - " + user_fullname);
             Console.WriteLine("Card number - " + card_number);
             Console.WriteLine("CVC - " + CVC);
-            Console.WriteLine("Valid Time - " + valid_time);
+            Console.WriteLine("Valid Time - " + valid_time_month + "/" + valid_time_year);
         }
     }
 }

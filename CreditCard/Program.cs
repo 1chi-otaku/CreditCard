@@ -13,12 +13,16 @@ namespace CreditCard
 
             try
             {
-                CreditCard a = new CreditCard("Karasik","12/52","1234567890123456","021");
+                CreditCard a = new CreditCard("Karasik","1234567890123456","013",12,99);
+                a.PrintCardDetails();
             }
             catch(Exception e)
             {
                 Console.WriteLine("Excpetion - " + e.Message);
             }
+
+            
+
           
         }
     }
